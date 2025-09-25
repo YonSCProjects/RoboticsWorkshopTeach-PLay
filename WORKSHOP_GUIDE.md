@@ -47,16 +47,27 @@ This living guide is the single source of truth for running a trauma‑informed,
 - **Images**: photos only of projects/hands unless student media consent is on file.
 
 
-### 5) LLM‑Assisted Learning Framework
+### 5) LLM‑First Workflow (Cursor‑Centered)
 
-- **Purpose**: a supportive coach, not a shortcut. Use LLMs to plan, scaffold, debug, reflect; verify outputs with tests.
-- **Ground rules**: protect privacy; attribute AI assistance; never paste personal data; verify code before running.
-- **Prompt patterns**:
-  - Plan → Implement → Verify → Reflect: “Help me plan the steps, then I’ll try, then you help me test and reflect.”
-  - Debug‑with‑context: paste minimal reproducible example, error, expected behavior, constraints.
-  - Rubber Duck: “Ask me questions until you can explain my bug back to me.”
-  - Scaffold‑first: “Give me a starter checklist; don’t give answers yet.”
-- **Student LLM checklist**: Did I specify hardware, versions, goals, constraints? Did I ask for small steps? Did I test safely? Did I cite what came from the LLM?
+- **Purpose**: LLMs are core builders. Students learn to direct AI to do most of the coding, writing, and refactoring while retaining responsibility for specifications, testing, and iteration quality.
+- **Operating model**: “Talk → Generate → Run → Observe → Adjust.” Students practice prompt craft, context curation, and rapid iteration inside Cursor.
+- **Ground rules**: protect privacy; attribute AI assistance; keep a project `CONTEXT.md`; verify outputs with tests/simulators before real hardware.
+
+- **Cursor workflow routines**:
+  1. Create/maintain `CONTEXT.md` at repo root with: goals, constraints, hardware details (boards/sensors/ports/voltages), acceptance tests, and known issues.
+  2. Use small, directive prompts in Cursor: include file paths, desired functions/APIs, and acceptance criteria (e.g., “Implement `loop()` to keep average CPU <15% and no blocking delays”).
+  3. Ask Cursor to make edits directly to files, not to paste blobs to chat. Prefer incremental edits with clear diffs.
+  4. After each change: run locally (or upload to board), observe, log results in the tutorial checklist, and ask Cursor for targeted adjustments.
+  5. Use git for checkpoints: commit at green tests; branch for experiments; summarize changes clearly.
+
+- **Prompt patterns (copy to LLM Prompt Cards)**:
+  - Specification‑first: “Here is `CONTEXT.md` and the acceptance tests. Propose a minimal plan and file edits. Ask me 3 questions first.”
+  - Edit‑by‑file: “Open `sheets_service.dart` and add a function `appendRowSafe(...)` that retries on 429 with jitter. Write tests in `test/sheets_service_test.dart`.”
+  - Debug‑MRE: “Minimal example in `examples/millis_blink.ino` fails to toggle. Expected blink at 500 ms. Board: Uno. Provide 3 hypotheses ranked by likelihood and a 60‑second test for each.”
+  - Refactor‑with‑constraints: “Refactor `line_follower.py` to separate sensor reading from control. Keep public API stable. Add `Kp` validation and clamp steering to ±100.”
+  - Verification‑first: “Generate 5 assertions to verify the reaction timer’s state machine. Add them as a quick test function we can run in the console.”
+
+- **Student LLM checklist**: Is the goal explicit? Did I include hardware/software versions? Are constraints clear (power, ports, timing)? Did I specify acceptance tests? Did I request edits to files, not pasted blobs? Did I run and report results back to the LLM?
 
 
 ### 6) Project Lifecycle Template (copy/paste per tutorial)
