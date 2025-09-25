@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>טיימר תגובה – בנייה מלאה עם Cursor בלבד</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #ffffff; color: #111; margin: 32px; line-height: 1.6; }
+    h1, h2, h3 { margin: 0 0 8px 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; margin-top: 24px; }
+    h3 { font-size: 18px; margin-top: 18px; }
+    p { margin: 8px 0; }
+    ul { padding-inline-start: 18px; }
+    li { margin: 4px 0; }
+    .note { color: #444; }
+    pre, code { font-family: Consolas, 'Courier New', monospace; }
+    pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; direction: ltr; text-align: left; }
+  </style>
+  <!-- מסמך זה מיושר לימין (RTL). ניתן לפתוח ב-Word ולשמור כ-DOCX. -->
+  <!-- עבור קטעי קוד הוגדר LTR כדי לשמור על סדר תווים נכון. -->
+</head>
+<body>
+  <h1>טיימר תגובה – בנייה מלאה עם Cursor בלבד (ללא הקלדת קוד)</h1>
+  <p>
+    מטרה: ללמד את התלמיד/ה לנהל בנייה שלמה בעזרת Cursor – ניסוח מטרות, מתן הקשר, בקשת עריכות לפי קבצים, הרצה, תצפית,
+    ועדכון דרישות – בלי לכתוב שורת קוד אחת. כל הקוד ייווצר על ידי ה‑LLM של Cursor.
+  </p>
+  <p class="note">לפני שמתחילים: פתחו את הקובץ <code>CONTEXT.md</code> וקראו את היעדים, המגבלות ומבחני הקבלה. לאורך כל התהליך נשתמש בהם כשפת עבודה עם Cursor.</p>
+
+  <h2>שלב 1 — יצירת שלד הפרויקט</h2>
+  <p>הדביקו לצ׳אט של Cursor (פעם אחת בתחילת העבודה):</p>
+  <pre><code>קרא/י את `CONTEXT.md` בריפו. צר/י קובץ `index.html` שמממש משחק טיימר תגובה בסיסי לפי מבחני הקבלה. שמור/י את הכל בקובץ יחיד בהתחלה. ודא/י שהטקסט קריא ונגיש, ושיש מצבי מסך: idle, waiting, ready, clicked, toosoon.
+  </code></pre>
+  <p>בדקו: פתחו את <code>index.html</code> בדפדפן, לחצו Start, חכו לירוק, ולחצו. אם לא עובד – חזרו ל‑Cursor עם תיאור התקלה.</p>
+
+  <h2>שלב 2 — טיפול במקרי קצה ו‑UX</h2>
+  <p>הדביקו לצ׳אט של Cursor:</p>
+  <pre><code>עדכן/ני את `index.html`: הוסף/י הגנה על false start (לחיצה מוקדמת) והפכי את כל הפאנל עצמו ל"כפתור" בעת הצורך. שמור/י על מחלקות CSS נפרדות לכל מצב כדי שנוכל לאבחן בקלות. הוסף/י מונה ניסיונות.
+  </code></pre>
+  <p>בדקו: נסו ללחוץ מוקדם, וודאו שהמשחק מונע לחיצה מוקדמת ומנחה להתחיל שוב.</p>
+
+  <h2>שלב 3 — שיפור מדדים וזיכרון</h2>
+  <p>הדביקו לצ׳אט של Cursor:</p>
+  <pre><code>עדכן/ני את `index.html`: הוסף/י שמירת שיא (best) ב‑localStorage וחשבי ממוצע של 10 ניסיונות אחרונים. הוסף/י תמיכה במקש רווח: start/click.
+  </code></pre>
+  <p>בדקו: בצעו 10 ניסיונות, ראו ממוצע ושיא נשמר לאחר רענון.</p>
+
+  <h2>שלב 4 — בדיקות/אימות (Verification‑first)</h2>
+  <p>הדביקו לצ׳אט של Cursor:</p>
+  <pre><code>הצע/י 5 בדיקות ידניות קצרות המאשרות את סדרי המצבים של המשחק והדיוק במדידה. הוסף/י בלוק JS קצר בקונסול (או פונקציית debug) שמדפיסה את state במעברים מרכזיים.
+  </code></pre>
+  <p>בדקו: עקבו אחרי ה‑state בזמן משחק קצר ובדקו שאין מעברים בלתי חוקיים.</p>
+
+  <h2>שלב 5 — רפלקציה ו‑Git</h2>
+  <p>הדביקו לצ׳אט של Cursor:</p>
+  <pre><code>כתוב/י תקציר שינויים (commit message) שמתאר את מה שנוסף בכל שלב. הכן/הכיני רשימת שיפורים עתידיים (2–3 רעיונות). אין צורך לשנות קוד.
+  </code></pre>
+  <p>בצעו commit ו‑push כרגיל (Cursor יכול להציע ניסוח להודעת ה‑commit).</p>
+
+  <h2>נקודות בדיקה (על פי <code>CONTEXT.md</code>)</h2>
+  <ul>
+    <li>Start → "Wait for green…" → ירוק אחרי 1.2–3.2 שניות → Click מציג זמן במילישניות.</li>
+    <li>לחיצה מוקדמת → "Too soon!"; כפתור Click ננעל עד Start מחדש.</li>
+    <li>Best נשמר ב‑localStorage. אם חסום – אין שגיאות, המשחק פועל.</li>
+    <li>(אופציונלי) מקש רווח עובד; ממוצע 10 מופיע ומתעדכן.</li>
+  </ul>
+
+  <h2>טיפים לעבודה עם Cursor</h2>
+  <ul>
+    <li>תמיד לציין את שם הקובץ והאזור לעריכה.</li>
+    <li>לתאר תוצאה נצפית בדיוק (מה קרה, מה ציפינו), ואז לבקש התאמה נקודתית.</li>
+    <li>לשמור בקשות קטנות ורציפות; Commit כשהכול ירוק.</li>
+  </ul>
+
+  <p>— סוף המדריך —</p>
+</body>
+</html>
+
+
