@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>מינדסטורמס: Line Follower v1 — Cursor בלבד</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #fff; color: #111; margin: 32px; line-height: 1.6; }
+    h1, h2, h3 { margin: 0 0 8px 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; margin-top: 24px; }
+    p { margin: 8px 0; }
+    ul { padding-inline-start: 18px; }
+    li { margin: 4px 0; }
+    pre, code { font-family: Consolas, 'Courier New', monospace; }
+    pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; direction: ltr; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>מינדסטורמס: Line Follower v1 — בנייה עם Cursor בלבד (ללא הקלדת קוד)</h1>
+  <p>מטרה: לגרום ל‑Cursor לייצר קוד ומבנה מלא למעקב קו v1: כיול רפלקטנס, בקר Threshold, ואז תיקון פרופורציונלי.</p>
+  <p>סביבה: SPIKE Prime/Robot Inventor Python (ניתן להתאים ל‑EV3 MicroPython בפרומפטים דומים).</p>
+
+  <h2>שלב 1 — כיול וחישוב סף</h2>
+  <p>הדביקו לצ׳אט של Cursor:</p>
+  <pre><code>צר/י קובץ `line_follower/calibrate.py` שקורא רפלקטנס מעל לבן ואז מעל שחור,
+מדפיס ערכים, ומחשב T=(white+black)/2. הוסף/י הנחיות תצוגה קצרות בקונסול.</code></pre>
+  <p>בדיקה: לבן &gt; שחור; אם קרובים מדי — הנמכת חיישן/הצללה.</p>
+
+  <h2>שלב 2 — בקר סף (bang‑bang)</h2>
+  <p>הדביקו:</p>
+  <pre><code>צר/י `line_follower/bang_bang.py` עם base_speed, קריאת חיישן, ואם r&lt;T — פנייה ימינה אחרת שמאלה.
+פרמטרים נוחים לכיוון בראש הקובץ.</code></pre>
+  <p>בדיקה: עקיבה רועדת אך עובדת.</p>
+
+  <h2>שלב 3 — תיקון פרופורציונלי (Kp)</h2>
+  <p>הדביקו:</p>
+  <pre><code>צר/י `line_follower/proportional.py` שמחשב e=r-T ו‑turn=Kp*e, כולל clamp ל‑±100.
+הוסף/י הערות טיוב.</code></pre>
+  <p>בדיקה: עקיבה חלקה יותר.</p>
+
+  <h2>שלב 4 — התאוששות מאיבוד קו (אופציונלי)</h2>
+  <p>הדביקו:</p>
+  <pre><code>הוסף/י זיהוי יציאה מהקו ל-&gt;300ms, עצירה וסריקה איטית להשבה לקו.</code></pre>
+
+  <h2>נקודות בדיקה (Acceptance)</h2>
+  <ul>
+    <li>כיול מניב T סביר.</li>
+    <li>bang‑bang עוקב קצה.</li>
+    <li>proportional עוקב חלק וניתן לטיוב.</li>
+  </ul>
+
+  <h2>טיפים לפרומפטים מול Cursor</h2>
+  <ul>
+    <li>ציינו קבצים ושמות פורטים (A/B מנועים, F חיישן — לפי הבנייה).</li>
+    <li>דווחו תוצאות מדויקות ובקשו שינוי ממוקד.</li>
+    <li>איטרציות קצרות; commit כשהכול ירוק.</li>
+  </ul>
+
+  <p>— סוף המדריך —</p>
+</body>
+</html>
+
+
