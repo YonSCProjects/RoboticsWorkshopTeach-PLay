@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ארדואינו: בלינק ותבניות מורס — Cursor בלבד</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #fff; color: #111; margin: 32px; line-height: 1.6; }
+    h1, h2, h3 { margin: 0 0 8px 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; margin-top: 24px; }
+    p { margin: 8px 0; }
+    ul { padding-inline-start: 18px; }
+    li { margin: 4px 0; }
+    pre, code { font-family: Consolas, 'Courier New', monospace; }
+    pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; direction: ltr; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>ארדואינו: בלינק ותבניות מורס — בנייה עם Cursor בלבד (ללא הקלדת קוד)</h1>
+  <p>מטרה: לגרום ל‑Cursor ליצור ולהתאים את כל הקוד; התלמיד/ה מנהל/ת את התהליך דרך פרומפטים, הרצה, תצפית, ועדכון. נשתמש ב‑LED המובנה כברירת מחדל.</p>
+  <p>לפני שמתחילים: ודאו ש‑Arduino IDE (2.x) מותקן ושהלוח מזוהה. אם עובדים עם LED חיצוני — חברו נגד 220Ω בטור והקפידו על קוטביות.</p>
+
+  <h2>שלב 1 — בלינק לא‑חוסם (millis)</h2>
+  <p>הדביקו לצ׳אט של Cursor:</p>
+  <pre><code>צור/י קובץ `millis_blink/millis_blink.ino` שמממש בלינק לא‑חוסם בעזרת millis():
+LED מובנה, החלפה כל 500ms, ללא delay(). הוסף/י הערות קצרות בעברית.</code></pre>
+  <p>בדיקה: העלו את הסקץ׳. ה‑LED אמור להבהב חלק. אם לא — דווחו ל‑Cursor מה קרה.</p>
+
+  <h2>שלב 2 — נגן תבניות (Heartbeat)</h2>
+  <p>הדביקו:</p>
+  <pre><code>עדכן/ני את `millis_blink/millis_blink.ino`: הוסף/י struct Segment {durationMs, level}
+ומערך HEARTBEAT קצר. כתוב/י לולאה שמנגנת את המקטעים ברצף ללא delay().
+הוסף/י הדפסות Serial מינימליות לצורך דיבוג (אינדקס/משך).</code></pre>
+  <p>בדיקה: אמור להיראות "קצר‑קצר‑הפסקה". אם נתקע דולק/כבוי — בקשו הדפסות elapsed ו‑segIndex.</p>
+
+  <h2>שלב 3 — SOS במורס (… --- …)</h2>
+  <p>הדביקו:</p>
+  <pre><code>צור/י קובץ `morse_sos/morse_sos.ino` עם יחידת זמן U=120ms.
+הגדר/י מערך Segment ל‑... --- ... כולל פערים בהתאם לכללי מורס.
+הדפס/י ל‑Serial מעבר מקטעים (אינדקס/משך/LEVEL) לאימות.</code></pre>
+  <p>בדיקה: קצב קריא; התאימו U לפי הצורך.</p>
+
+  <h2>שלב 4 — בדיקות/אימות ושיפורים</h2>
+  <p>הדביקו:</p>
+  <pre><code>הצע/י 3–5 בדיקות קצרות לאימות: (1) אין delay(), (2) HEARTBEAT מתקדם בזמן הנכון,
+(3) SOS מחזור ≈ 27U. הצע/י פונקציה לבדיקת זמן מחזור והוסף/י הערות בטיחות.</code></pre>
+
+  <h2>נקודות בדיקה (Acceptance)</h2>
+  <ul>
+    <li>בלינק millis יציב וללא קיפאון.</li>
+    <li>HEARTBEAT מנגן במחזוריות עקבית.</li>
+    <li>SOS ברור; שינוי U משפיע על הקצב; דיבוג סביר.</li>
+  </ul>
+
+  <h2>טיפים לפרומפטים מול Cursor</h2>
+  <ul>
+    <li>לציין תמיד קובץ יעד ומה לבצע בו.</li>
+    <li>לדווח תוצאה נצפית, ואז לבקש התאמה ממוקדת.</li>
+    <li>איטרציות קצרות; commit כשהכול ירוק.</li>
+  </ul>
+
+  <p>— סוף המדריך —</p>
+</body>
+</html>
+
+
